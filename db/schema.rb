@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161213103856) do
+ActiveRecord::Schema.define(version: 20161213115533) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,10 +23,13 @@ ActiveRecord::Schema.define(version: 20161213103856) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.string   "title",                   comment: "글 제목"
-    t.text     "content",                 comment: "글 내용"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "title",                    comment: "글 제목"
+    t.text     "content",                  comment: "글 내용"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "bulletin_id"
+    t.index ["bulletin_id"], name: "index_posts_on_bulletin_id", using: :btree
   end
 
+  add_foreign_key "posts", "bulletins"
 end
