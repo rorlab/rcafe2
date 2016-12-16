@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  resources :bulletins
   resources :posts
-  root 'welcome#index'
-  #get 'welcome/index'
+  resources :bulletins do
+    resources :posts
+  end
 
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root 'welcome#index'
 end

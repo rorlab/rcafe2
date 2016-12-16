@@ -1,3 +1,3 @@
 class Post < ApplicationRecord
-  belongs_to :bulletin
+  belongs_to :bulletin, optional: true
 end
