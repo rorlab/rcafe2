@@ -34,6 +34,9 @@
 
     <div class="container">
 
+      <%#= render partial: 'shared/flash_messages', flash: flash %>
+      <%= flash_messages(:close, :fade) %>
+
       <%= yield %>
 
     </div> <!-- /container -->
