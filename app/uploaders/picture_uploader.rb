@@ -15,8 +15,23 @@ class PictureUploader < CarrierWave::Uploader::Base
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
+
   def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+    "#{base_store_dir}/#{model.id}"
+  end
+
+  def base_store_dir
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}"
+  end
+
+  def delete_empty_upstream_dirs
+    path = ::File.expand_path(store_dir, root)
+    Dir.delete(path) # fails if path not empty dir
+
+    path = ::File.expand_path(base_store_dir, root)
+    Dir.delete(path) # fails if path not empty dir
+  rescue SystemCallError
+    true # nothing, the dir is not empty
   end
 
 
@@ -28,16 +43,6 @@ class PictureUploader < CarrierWave::Uploader::Base
 
   def extension_white_list
     %w(jpg jpeg gif png pdf)
-  end
-
-  def delete_empty_upstream_dirs
-    path = ::File.expand_path(store_dir, root)
-    Dir.delete(path) # fails if path not empty dir
-
-    path = ::File.expand_path(base_store_dir, root)
-    Dir.delete(path) # fails if path not empty dir
-  rescue SystemCallError
-    true # nothing, the dir is not empty
   end
 
 
