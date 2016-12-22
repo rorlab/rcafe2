@@ -44,6 +44,7 @@ gem 'capistrano3-puma' , group: :development
 gem 'capistrano-figaro-yml', '~> 1.0.2'
 gem 'capistrano-upload-config'
 gem 'capistrano3-nginx', '~> 2.0'
+gem 'capistrano-rails-collection'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
