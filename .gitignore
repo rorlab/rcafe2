@@ -19,3 +19,5 @@
 public/uploads/*
 # Ignore application configuration
 /config/application.yml
+/config/database.staging.yml
+/config/secrets.staging.yml

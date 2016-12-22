@@ -15,6 +15,8 @@ require 'capistrano/figaro_yml'
 require 'capistrano/upload-config'
 require 'capistrano/puma/nginx'   # if you want to upload a nginx site template
 require 'capistrano/nginx'
+require 'capistrano/scm/git'
+install_plugin Capistrano::SCM::Git
 
 # Load custom tasks from `lib/capistrano/tasks` if you have any defined
 Dir.glob('lib/capistrano/tasks/*.rake').each { |r| import r }

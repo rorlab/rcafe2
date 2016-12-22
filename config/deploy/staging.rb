@@ -1,5 +1,5 @@
-server 'ubuntu16.dev', user: 'deployer', roles: %w{app db web}
-set :nginx_server_name, 'staging.ubuntu16.dev'
+server 'ubuntu16.vm', user: 'deployer', roles: %w{app db web}
+set :nginx_server_name, 'staging.ubuntu16.vm'
 
 
 # server-based syntax
