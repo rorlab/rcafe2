@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_bulletin
   before_action :set_post, only: [:show, :edit, :update, :destroy]
+  before_action :updatable, except: [:show, :index], if: :is_news
 
   def index
     if @bulletin.present?
@@ -73,5 +74,19 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:title, :content, :picture, :picture_cache, :tag_list_fixed)
+  end
+
+  protected
+
+  def updatable
+    if !current_user.admin
+      redirect_to bulletin_posts_path(5), notice: "읽기와 목록보기 권한만이 있습니다. "
+    end
+  end
+
+  def is_news
+    # logger.info "Is it the news type? : #{@bulletin.post_type == :news}"
+    # logger.info @bulletin.inspect
+    @bulletin.post_type_cd == 3
   end
 end
